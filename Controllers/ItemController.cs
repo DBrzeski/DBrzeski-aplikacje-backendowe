@@ -18,7 +18,7 @@ namespace storeapp.Controllers
         public async Task<IActionResult> Index()
         {
             var allItems = await _context.Item.ToListAsync();
-            return View();
+            return View(allItems);
         }
     }
 }
