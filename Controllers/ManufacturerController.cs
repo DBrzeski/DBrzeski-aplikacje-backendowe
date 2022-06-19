@@ -17,7 +17,7 @@ namespace storeapp.Controllers
         public IActionResult Index()
         {
             var data = _context.Manufacturer.ToList();
-            return View();
+            return View(data);
         }
     }
 }
