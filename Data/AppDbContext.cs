@@ -15,5 +15,6 @@ namespace storeapp.Data
         }
 
         public DbSet<Item> Item { get; set; }
+        public DbSet<Manufacturer> Manufacturer { get; set; }
     }
 }
