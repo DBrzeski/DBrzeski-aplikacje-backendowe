@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using storeapp.Data;
 using System;
 using System.Collections.Generic;
@@ -14,9 +15,9 @@ namespace storeapp.Controllers
         {
             _context = context;
         }
-        public IActionResult Index()
+        public async  Task<IActionResult> Index()
         {
-            var data = _context.Manufacturer.ToList();
+            var data = await _context.Manufacturer.ToListAsync();
             return View(data);
         }
     }
