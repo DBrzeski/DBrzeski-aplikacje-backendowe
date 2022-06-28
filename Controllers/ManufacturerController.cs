@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using storeapp.Data;
+using storeapp.Data.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,14 +11,14 @@ namespace storeapp.Controllers
 {
     public class ManufacturerController : Controller
     {
-        private readonly AppDbContext _context;
-        public ManufacturerController(AppDbContext context)
+        private readonly IManufacturerService _service;
+        public ManufacturerController(IManufacturerService service)
         {
-            _context = context;
+            _service = service;
         }
-        public async  Task<IActionResult> Index()
+        public async Task<IActionResult> Index()
         {
-            var data = await _context.Manufacturer.ToListAsync();
+            var data = await _service.GetAll();
             return View(data);
         }
     }
