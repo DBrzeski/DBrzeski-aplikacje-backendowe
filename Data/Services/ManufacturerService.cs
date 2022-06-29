@@ -30,18 +30,6 @@ namespace storeapp.Data.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<Manufacturer>> GetAllAsync()
-        {
-            var result = await _context.Manufacturer.ToListAsync();
-            return result;
-        }
-
-        public async Task<Manufacturer> GetByIdAsync(int id)
-        {
-            var result = await _context.Manufacturer.FirstOrDefaultAsync(n => n.Id == id);
-            return result;
-        }
-
         public async Task<Manufacturer> UpdateAsync(int id, Manufacturer newManufacturer)
         {
             _context.Update(newManufacturer);
