@@ -10,7 +10,7 @@ namespace storeapp.Data.Services
     {
         Task<IEnumerable<Manufacturer>> GetAllAsync();
         Task<Manufacturer> GetByIdAsync(int id);
-        Task AddAsync(Manufacturer actor);
+        Task AddAsync(Manufacturer manufacturer);
         Task<Manufacturer> UpdateAsync(int id, Manufacturer newManufacturer);
         Task DeleteAsync(int id);
     }
