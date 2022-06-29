@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using storeapp.Data;
 using storeapp.Data.Services;
+using storeapp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,9 +22,20 @@ namespace storeapp.Controllers
             var data = await _service.GetAll();
             return View(data);
         }
-        public  IActionResult Create()
+        public IActionResult Create()
         {
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([Bind("Name,PictureUrl")]Manufacturer manufacturer)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(manufacturer);
+            }
+            _service.Add(manufacturer);
+            return RedirectToAction(nameof(Index));
         }
     }
 }

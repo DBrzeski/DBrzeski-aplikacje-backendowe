@@ -19,7 +19,8 @@ namespace storeapp.Data.Services
 
         public void Add(Manufacturer manufacturer)
         {
-            throw new NotImplementedException();
+            _context.Manufacturer.Add(manufacturer);
+            _context.SaveChanges();
         }
 
         public void Delete(int id)
