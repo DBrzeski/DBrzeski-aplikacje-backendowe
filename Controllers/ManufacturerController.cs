@@ -42,13 +42,13 @@ namespace storeapp.Controllers
         {
             var manufacturerDetails = await _service.GetByIdAsync(id);
 
-            if (manufacturerDetails == null) return View("Empty");
+            if (manufacturerDetails == null) return View("NotFound");
             return View(manufacturerDetails);
         }
         public async Task<IActionResult> Edit(int id)
         {
             var manufacturerDetails = await _service.GetByIdAsync(id);
-            if (manufacturerDetails == null) return View("Not Found");
+            if (manufacturerDetails == null) return View("NotFound");
             return View(manufacturerDetails);
         }
         [HttpPost]
@@ -64,14 +64,14 @@ namespace storeapp.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             var manufacturerDetails = await _service.GetByIdAsync(id);
-            if (manufacturerDetails == null) return View("Not Found");
+            if (manufacturerDetails == null) return View("NotFound");
             return View(manufacturerDetails);
         }
         [HttpPost, ActionName("Delete")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var manufacturerDetails = await _service.GetByIdAsync(id);
-            if (manufacturerDetails == null) return View("Not Found");
+            if (manufacturerDetails == null) return View("NotFound");
 
             await _service.DeleteAsync(id);
             return RedirectToAction(nameof(Index));
