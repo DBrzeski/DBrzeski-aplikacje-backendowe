@@ -12,6 +12,6 @@ namespace storeapp.Data.Services
         Task<Manufacturer> GetByIdAsync(int id);
         Task AddAsync(Manufacturer actor);
         Task<Manufacturer> UpdateAsync(int id, Manufacturer newManufacturer);
-        void Delete(int id);
+        Task DeleteAsync(int id);
     }
 }

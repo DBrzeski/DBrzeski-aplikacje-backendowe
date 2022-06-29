@@ -23,9 +23,11 @@ namespace storeapp.Data.Services
             await _context.SaveChangesAsync();
         }
 
-        public void Delete(int id)
+        public async Task DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            var result = await _context.Manufacturer.FirstOrDefaultAsync(n => n.Id == id);
+            _context.Manufacturer.Remove(result);
+            await _context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<Manufacturer>> GetAllAsync()

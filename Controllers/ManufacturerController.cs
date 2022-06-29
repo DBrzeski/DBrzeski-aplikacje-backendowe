@@ -61,5 +61,20 @@ namespace storeapp.Controllers
             await _service.UpdateAsync(id, manufacturer);
             return RedirectToAction(nameof(Index));
         }
+        public async Task<IActionResult> Delete(int id)
+        {
+            var manufacturerDetails = await _service.GetByIdAsync(id);
+            if (manufacturerDetails == null) return View("Not Found");
+            return View(manufacturerDetails);
+        }
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var manufacturerDetails = await _service.GetByIdAsync(id);
+            if (manufacturerDetails == null) return View("Not Found");
+
+            await _service.DeleteAsync(id);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
