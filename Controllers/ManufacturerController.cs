@@ -19,7 +19,7 @@ namespace storeapp.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var data = await _service.GetAll();
+            var data = await _service.GetAllAsync();
             return View(data);
         }
         public IActionResult Create()
@@ -34,8 +34,16 @@ namespace storeapp.Controllers
             {
                 return View(manufacturer);
             }
-            _service.Add(manufacturer);
+            await _service.AddAsync(manufacturer);
             return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> Details(int id)
+        {
+            var manufacturerDetails = await _service.GetByIdAsync(id);
+
+            if (manufacturerDetails == null) return View("Empty");
+            return View(manufacturerDetails);
         }
     }
 }

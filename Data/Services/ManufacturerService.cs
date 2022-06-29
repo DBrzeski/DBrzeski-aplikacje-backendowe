@@ -17,10 +17,10 @@ namespace storeapp.Data.Services
             _context = context;
         }
 
-        public void Add(Manufacturer manufacturer)
+        public async Task AddAsync(Manufacturer manufacturer)
         {
-            _context.Manufacturer.Add(manufacturer);
-            _context.SaveChanges();
+            await _context.Manufacturer.AddAsync(manufacturer);
+            await _context.SaveChangesAsync();
         }
 
         public void Delete(int id)
@@ -28,18 +28,19 @@ namespace storeapp.Data.Services
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<Manufacturer>> GetAll()
+        public async Task<IEnumerable<Manufacturer>> GetAllAsync()
         {
             var result = await _context.Manufacturer.ToListAsync();
             return result;
         }
 
-        public Manufacturer GetById(int id)
+        public async Task<Manufacturer> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var result = await _context.Manufacturer.FirstOrDefaultAsync(n => n.Id == id);
+            return result;
         }
 
-        public Manufacturer Update(int id, Manufacturer manufacturer)
+        public Manufacturer Update(int id, Manufacturer newActor)
         {
             throw new NotImplementedException();
         }

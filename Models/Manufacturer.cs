@@ -10,7 +10,11 @@ namespace storeapp.Models
     {
         [Key]
         public int Id { get; set; }
+        [Display(Name = "Name")]
+        [Required(ErrorMessage = "Name is required")]
         public string Name { get; set; }
+        [Display(Name = "Logo")]
+        [Required(ErrorMessage = "Logo is required")]
         public string PictureUrl { get; set; }
         public List<Item> Items { get; set; }
     }

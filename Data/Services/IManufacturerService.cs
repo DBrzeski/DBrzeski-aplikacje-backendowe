@@ -8,10 +8,10 @@ namespace storeapp.Data.Services
 {
     public interface IManufacturerService
     {
-        Task<IEnumerable<Manufacturer>> GetAll();
-        Manufacturer GetById(int id);
-        void Add(Manufacturer manufacturer);
-        Manufacturer Update(int id, Manufacturer manufacturer);
+        Task<IEnumerable<Manufacturer>> GetAllAsync();
+        Task<Manufacturer> GetByIdAsync(int id);
+        Task AddAsync(Manufacturer actor);
+        Manufacturer Update(int id, Manufacturer newActor);
         void Delete(int id);
     }
 }
