@@ -3,6 +3,7 @@ using storeapp.Data.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -20,6 +21,10 @@ namespace storeapp.Models
         //Basic information-----------------------------------
 
         public ItemCategory ItemCategory { get; set; }
+
+        public int ManufacturerId { get; set; }
+        [ForeignKey("ManufacturerId")]
+        public Manufacturer Manufacturer { get; set; }
 
     }
 }

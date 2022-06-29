@@ -9,6 +9,6 @@ namespace storeapp.Data.Services
 {
     public interface IItemService:IEntityBaseRepository<Item>
     {
-
+        Task<Item> GetItemByIdAsync(int id);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+
 using storeapp.Data.Services;
 using System;
 using System.Collections.Generic;
@@ -17,8 +18,14 @@ namespace storeapp.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var allItems = await _service.GetAllAsync();
+            var allItems = await _service.GetAllAsync(n => n.Manufacturer);
             return View(allItems);
         }
+        public async Task<IActionResult> Details(int id)
+        {
+            var itemDetail = await _service.GetItemByIdAsync(id);
+            return View(itemDetail);
+        }
+        
     }
 }
