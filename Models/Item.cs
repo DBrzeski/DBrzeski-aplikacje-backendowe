@@ -1,4 +1,5 @@
-﻿using storeapp.Data.Enums;
+﻿using storeapp.Data.Base;
+using storeapp.Data.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace storeapp.Models
 {
-    public class Item
+    public class Item:IEntityBase
     {
         [Key]
         public int Id { get; set; }

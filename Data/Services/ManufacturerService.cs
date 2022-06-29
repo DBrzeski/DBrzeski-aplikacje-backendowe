@@ -12,7 +12,6 @@ namespace storeapp.Data.Services
     public class ManufacturerService : EntityBaseRepository<Manufacturer>, IManufacturerService
     {
 
-        private readonly AppDbContext _context;
         public ManufacturerService(AppDbContext context) : base(context)
         {
 

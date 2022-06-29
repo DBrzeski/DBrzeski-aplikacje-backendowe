@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using storeapp.Data;
+using storeapp.Data.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,14 +10,14 @@ namespace storeapp.Controllers
 {
     public class ItemController : Controller
     {
-        private readonly AppDbContext _context;
-        public ItemController(AppDbContext context)
+        private readonly IItemService _service;
+        public ItemController(IItemService service)
         {
-            _context = context;
+            _service = service;
         }
         public async Task<IActionResult> Index()
         {
-            var allItems = await _context.Item.ToListAsync();
+            var allItems = await _service.GetAllAsync();
             return View(allItems);
         }
     }
