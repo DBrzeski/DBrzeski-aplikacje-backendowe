@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace storeapp.Data.Base
 {
-    interface IEntityBaseRepository<T> where T: class,IEntityBase, new()
+    public interface IEntityBaseRepository<T> where T: class,IEntityBase, new()
     {
         Task<IEnumerable<T>> GetAllAsync();
         Task<T> GetByIdAsync(int id);

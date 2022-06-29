@@ -1,4 +1,5 @@
-﻿using System;
+﻿using storeapp.Data.Base;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace storeapp.Models
 {
-    public class Manufacturer
+    public class Manufacturer: IEntityBase
     {
         [Key]
         public int Id { get; set; }

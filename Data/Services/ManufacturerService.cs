@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using storeapp.Controllers;
+using storeapp.Data.Base;
 using storeapp.Models;
 using System;
 using System.Collections.Generic;
@@ -8,33 +9,13 @@ using System.Threading.Tasks;
 
 namespace storeapp.Data.Services
 {
-    public class ManufacturerService : IManufacturerService
+    public class ManufacturerService : EntityBaseRepository<Manufacturer>, IManufacturerService
     {
 
         private readonly AppDbContext _context;
-        public ManufacturerService(AppDbContext context)
+        public ManufacturerService(AppDbContext context) : base(context)
         {
-            _context = context;
-        }
 
-        public async Task AddAsync(Manufacturer manufacturer)
-        {
-            await _context.Manufacturer.AddAsync(manufacturer);
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task DeleteAsync(int id)
-        {
-            var result = await _context.Manufacturer.FirstOrDefaultAsync(n => n.Id == id);
-            _context.Manufacturer.Remove(result);
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task<Manufacturer> UpdateAsync(int id, Manufacturer newManufacturer)
-        {
-            _context.Update(newManufacturer);
-            await _context.SaveChangesAsync();
-            return newManufacturer;
         }
     }
 }
