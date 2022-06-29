@@ -11,7 +11,7 @@ namespace storeapp.Data.Services
         Task<IEnumerable<Manufacturer>> GetAllAsync();
         Task<Manufacturer> GetByIdAsync(int id);
         Task AddAsync(Manufacturer actor);
-        Manufacturer Update(int id, Manufacturer newActor);
+        Task<Manufacturer> UpdateAsync(int id, Manufacturer newManufacturer);
         void Delete(int id);
     }
 }

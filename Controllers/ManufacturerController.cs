@@ -45,5 +45,21 @@ namespace storeapp.Controllers
             if (manufacturerDetails == null) return View("Empty");
             return View(manufacturerDetails);
         }
+        public async Task<IActionResult> Edit(int id)
+        {
+            var manufacturerDetails = await _service.GetByIdAsync(id);
+            if (manufacturerDetails == null) return View("Not Found");
+            return View(manufacturerDetails);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,PictureUrl")] Manufacturer manufacturer)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(manufacturer);
+            }
+            await _service.UpdateAsync(id, manufacturer);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

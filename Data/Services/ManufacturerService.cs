@@ -40,9 +40,11 @@ namespace storeapp.Data.Services
             return result;
         }
 
-        public Manufacturer Update(int id, Manufacturer newActor)
+        public async Task<Manufacturer> UpdateAsync(int id, Manufacturer newManufacturer)
         {
-            throw new NotImplementedException();
+            _context.Update(newManufacturer);
+            await _context.SaveChangesAsync();
+            return newManufacturer;
         }
     }
 }
