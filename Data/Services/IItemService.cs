@@ -12,5 +12,6 @@ namespace storeapp.Data.Services
     {
         Task<Item> GetItemByIdAsync(int id);
         Task<NewItemDropdownsVM> GetNewItemDropdownsValues();
+        Task AddNewItemAsync(NewItemVM data);
     }
 }

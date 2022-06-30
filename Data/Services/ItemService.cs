@@ -17,10 +17,20 @@ namespace storeapp.Data.Services
             _context = context;
         }
 
-        //public Task<Item> GetMovieByIdAsync(int id)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public async Task AddNewItemAsync(NewItemVM data)
+        {
+            var newItem = new Item()
+            {
+                Name = data.Name,
+                Description = data.Description,
+                Price = data.Price,
+                ItemCategory = data.ItemCategory,
+                ManufacturerId = data.ManufacturerId,
+                PictureUrl = data.PictureUrl
+            };
+            await _context.Item.AddAsync(newItem);
+            await _context.SaveChangesAsync();
+        }
 
 
 

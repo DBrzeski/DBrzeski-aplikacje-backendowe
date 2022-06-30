@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 using storeapp.Data.Services;
+using storeapp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +33,20 @@ namespace storeapp.Controllers
             var itemDropdownsData = await _service.GetNewItemDropdownsValues();
             ViewBag.ManufacturerId = new SelectList(itemDropdownsData.Manufacturer, "Id", "Name");
             return View();
+        }
+        [HttpPost]
+
+        public async Task<IActionResult> Create(NewItemVM item)
+        {
+            if (!ModelState.IsValid)
+            {
+                var itemDropdownsData = await _service.GetNewItemDropdownsValues();
+                ViewBag.ManufacturerId = new SelectList(itemDropdownsData.Manufacturer, "Id", "Name");
+
+                return View(item);
+            }
+            await _service.AddNewItemAsync(item);
+            return RedirectToAction(nameof(Index));
         }
     }
 }
