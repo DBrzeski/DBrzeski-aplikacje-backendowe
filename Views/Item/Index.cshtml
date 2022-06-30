@@ -30,15 +30,16 @@
                                 if (item.Description.Length > 50)
                                 {
                                     shortDesc = item.Description.Substring(0, 50) + "...";
-                                } else
+                                }
+                                else
                                 {
                                     shortDesc = item.Description;
                                 }
 
                             }
                             <p class="card-text">@shortDesc</p>
-                            <p class="card-text"><b>Category: </b>@item.ItemCategory</p> 
-                            <p class="card-text"><b>Manufacturer: </b>@item.Manufacturer.Name</p> 
+                            <p class="card-text"><b>Category: </b>@item.ItemCategory</p>
+                            <p class="card-text"><b>Manufacturer: </b>@item.Manufacturer.Name</p>
                             <i class="bi bi-search"></i>
 
                         </div>
@@ -47,7 +48,8 @@
                         <div class="card-footer ">
                             <p class="card-text">
                                 <a class="btn btn-outline-primary float-right" asp-action="Details" asp-route-id="@item.Id">
-                                <i class="bi bi-eye-fill"></i> Show Details</a>
+                                    <i class="bi bi-eye-fill"></i> Show Details
+                                </a>
                                 <a class="btn btn-success text-white"><i class="bi bi-cart-plus"></i> Add to Cart (Price @item.Price.ToString("c"))</a>
                             </p>
                         </div>
@@ -57,3 +59,6 @@
         </div>
     }
 </div>
+
+
+@await Html.PartialAsync("_CreateItem", "Item"); 
