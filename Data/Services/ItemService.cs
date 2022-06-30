@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using storeapp.Data.Base;
+using storeapp.Data.ViewModels;
 using storeapp.Models;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,14 @@ namespace storeapp.Data.Services
             var itemDetails = _context.Item
                 .Include(m => m.Manufacturer).FirstOrDefaultAsync(n => n.Id == id);
             return await itemDetails;
+        }
+
+        public async Task<NewItemDropdownsVM> GetNewItemDropdownsValues()
+        {
+            var response = new NewItemDropdownsVM();
+            response.Manufacturer = await _context.Manufacturer.OrderBy(n => n.Name).ToListAsync();
+
+            return response;
         }
     }
 }

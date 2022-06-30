@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 using storeapp.Data.Services;
@@ -26,6 +27,11 @@ namespace storeapp.Controllers
             var itemDetail = await _service.GetItemByIdAsync(id);
             return View(itemDetail);
         }
-        
+        public async Task<IActionResult> Create()
+        {
+            var itemDropdownsData = await _service.GetNewItemDropdownsValues();
+            ViewBag.ManufacturerId = new SelectList(itemDropdownsData.Manufacturer, "Id", "Name");
+            return View();
+        }
     }
 }
