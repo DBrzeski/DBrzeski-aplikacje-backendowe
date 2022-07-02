@@ -48,5 +48,25 @@ namespace storeapp.Data.Services
 
             return response;
         }
+
+        public async Task UpdateItemAsync(NewItemVM data)
+        {
+            var dbItem = await _context.Item.FirstOrDefaultAsync(n => n.Id == data.Id);
+            
+            if(dbItem != null)
+            {
+                {
+                    dbItem.Name = data.Name; ;
+                    dbItem.Description = data.Description;
+                    dbItem.Price = data.Price;
+                    dbItem.ItemCategory = data.ItemCategory;
+                    dbItem.ManufacturerId = data.ManufacturerId;
+                    dbItem.PictureUrl = data.PictureUrl;
+                };
+                await _context.SaveChangesAsync();
+            }
+
+            
+        }
     }
 }

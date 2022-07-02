@@ -48,5 +48,42 @@ namespace storeapp.Controllers
             await _service.AddNewItemAsync(item);
             return RedirectToAction(nameof(Index));
         }
+
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var itemDetails = await _service.GetItemByIdAsync(id);
+            if (itemDetails == null) return View("NotFound");
+            var response = new NewItemVM()
+            {
+                Name = itemDetails.Name,
+                Description = itemDetails.Description,
+                Price = itemDetails.Price,
+                ItemCategory = itemDetails.ItemCategory,
+                ManufacturerId = itemDetails.ManufacturerId,
+                PictureUrl = itemDetails.PictureUrl,
+                Id = itemDetails.Id
+            };
+
+            var itemDropdownsData = await _service.GetNewItemDropdownsValues();
+            ViewBag.ManufacturerId = new SelectList(itemDropdownsData.Manufacturer, "Id", "Name");
+            return View(response);
+        }
+        [HttpPost]
+
+        public async Task<IActionResult> Edit(int id, NewItemVM item)
+        {
+            if (id != item.Id) return View("NotFound");
+
+            if (!ModelState.IsValid)
+            {
+                var itemDropdownsData = await _service.GetNewItemDropdownsValues();
+                ViewBag.ManufacturerId = new SelectList(itemDropdownsData.Manufacturer, "Id", "Name");
+
+                return View(item);
+            }
+            await _service.UpdateItemAsync(item);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

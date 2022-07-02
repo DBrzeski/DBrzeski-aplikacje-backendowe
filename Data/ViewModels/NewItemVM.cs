@@ -11,6 +11,7 @@ namespace storeapp.Models
 {
     public class NewItemVM
     {
+        public int Id { get; set; }
         [Required(ErrorMessage = "This field is required")]
         public string PictureUrl { get; set; }
         [Required(ErrorMessage = "This field is required")]
