@@ -16,5 +16,10 @@ namespace storeapp.Data
 
         public DbSet<Item> Item { get; set; }
         public DbSet<Manufacturer> Manufacturer { get; set; }
+
+
+        //Orders 
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
     }
 }
