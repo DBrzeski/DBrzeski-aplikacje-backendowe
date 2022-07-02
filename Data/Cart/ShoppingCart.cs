@@ -53,19 +53,17 @@ namespace storeapp.Data.Cart
         public void RemoveItemFromCart(Item item)
         {
             var shoppingCartItem = _context.ShoppingCartItems.FirstOrDefault(n => n.Item.Id == item.Id && n.ShoppingCartId == ShoppingCartId);
+
             if (shoppingCartItem != null)
             {
-                shoppingCartItem = new ShoppingCartItem();
-                
-                    if(shoppingCartItem.Amount > 1)
-                    {
-                        shoppingCartItem.Amount--;
-                    }
-                    else
-                    {
-                        _context.ShoppingCartItems.Remove(shoppingCartItem);
-                    }
-                
+                if (shoppingCartItem.Amount > 1)
+                {
+                    shoppingCartItem.Amount--;
+                }
+                else
+                {
+                    _context.ShoppingCartItems.Remove(shoppingCartItem);
+                }
             }
             _context.SaveChanges();
         }
