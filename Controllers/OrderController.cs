@@ -65,5 +65,11 @@ namespace storeapp.Controllers
             await _shoppingCart.ClearShoppingCartAsync();
             return View("OrderCompleted");
         }
+        public async Task<IActionResult> Index()
+        {
+            string userId = "";
+            var orders = await _orderService.GetOrderByUserIdAsync(userId);
+            return View(orders);
+        }
     }
 }
