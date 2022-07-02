@@ -18,6 +18,25 @@ namespace storeapp.Data.Cart
             _context = context;
         }
 
+        public void AddItemToCart(Item item)
+        {
+            var shoppingCartItem = _context.ShoppingCartItems.FirstOrDefault(n => n.Item.Id == item.Id && n.ShoppingCartId == ShoppingCartId);
+            if(shoppingCartItem == null)
+            {
+                shoppingCartItem = new ShoppingCartItem()
+                {
+                    ShoppingCartId = ShoppingCartId,
+                    Item = item,
+                    Amount = 1
+                };
+                _context.ShoppingCartItems.Add(shoppingCartItem);
+            }
+            else
+            {
+                shoppingCartItem.Amount++;
+            }
+            _context.SaveChanges();
+        }
 
         public List<ShoppingCartItem> GetShoppingCartItems()
         {
