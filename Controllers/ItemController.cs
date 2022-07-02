@@ -85,5 +85,18 @@ namespace storeapp.Controllers
             await _service.UpdateItemAsync(item);
             return RedirectToAction(nameof(Index));
         }
+        public async Task<IActionResult> Filter(string searchString)
+        {
+            var allItems = await _service.GetAllAsync(n => n.Manufacturer);
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                var filteredResults = allItems.Where(n => n.Name.ToLower().Contains(searchString.ToLower()) || n.Description.ToLower().Contains(searchString.ToLower())).ToList();
+                return View("Index",  filteredResults);
+            }
+
+            return View("Index");
+        }
+
     }
 }
