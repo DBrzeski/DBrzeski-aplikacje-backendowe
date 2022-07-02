@@ -35,9 +35,9 @@ namespace storeapp.Data.Services
                 var orderItem = new OrderItem()
                 {
                     Amount = item.Amount,
-                    ItemId = item.Id,
+                    ItemId = item.Item.Id,
                     OrderId = order.Id,
-                    price = item.Item.Price
+                    Price = item.Item.Price
                 };
                 await _context.OrderItems.AddAsync(orderItem);
             }

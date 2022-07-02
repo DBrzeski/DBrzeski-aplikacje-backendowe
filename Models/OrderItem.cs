@@ -12,7 +12,7 @@ namespace storeapp.Models
         [Key]
         public int Id { get; set; }
         public int Amount { get; set; }
-        public double price { get; set; }
+        public double Price { get; set; }
         public int ItemId { get; set; }
         [ForeignKey("ItemId")]
         public virtual Item Item { get; set; }
