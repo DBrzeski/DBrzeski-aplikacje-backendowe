@@ -19,7 +19,7 @@ namespace storeapp.Controllers
             _itemService = itemService;
             _shoppingCart = shoppingCart;
         }
-        public IActionResult Index()
+        public IActionResult ShoppingCart()
         {
             var items = _shoppingCart.GetShoppingCartItems();
             _shoppingCart.ShoppingCartItem = items;

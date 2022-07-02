@@ -1,10 +1,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using storeapp.Data;
+using storeapp.Data.Cart;
 using storeapp.Data.Services;
 using System;
 using System.Collections.Generic;
@@ -33,6 +35,11 @@ namespace storeapp
             services.AddScoped<IManufacturerService, ManufacturerService>();
             services.AddScoped<IItemService, ItemService>();
 
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped(sc => ShoppingCart.GetShoppingCart(sc));
+
+            services.AddSession();
+
             services.AddControllersWithViews();
         }
 
@@ -50,6 +57,7 @@ namespace storeapp
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseSession();
 
             app.UseAuthorization();
 
