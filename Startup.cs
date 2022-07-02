@@ -34,7 +34,7 @@ namespace storeapp
             //Services Configuration
             services.AddScoped<IManufacturerService, ManufacturerService>();
             services.AddScoped<IItemService, ItemService>();
-
+            services.AddScoped<IOrderService, OrderService>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped(sc => ShoppingCart.GetShoppingCart(sc));
 
