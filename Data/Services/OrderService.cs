@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using storeapp.Data.Enums;
 using storeapp.Models;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,8 @@ namespace storeapp.Data.Services
             var order = new Order()
             {
                 UserId = userId,
-                Email = userEmail
+                Email = userEmail,
+                Status = Status.New
             };
             await _context.Orders.AddAsync(order);
             await _context.SaveChangesAsync();

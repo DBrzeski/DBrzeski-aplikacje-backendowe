@@ -17,6 +17,7 @@
                     <td>Items</td>
                     <th>Total</th>
                     <th>User</th>
+                    <th>Order Status</th>
                 </tr>
             </thead>
             <tbody>
@@ -30,7 +31,7 @@
                                 {
                                     <li>
                                         <div class="alert alert-info" role="alert">
-                                            <span class="badge bg-success">@item.Amount</span> [@item.Price.ToString("c")] - @item.Item.Name
+                                            <span class="badge bg-success">@item.Amount</span> [@item.Price.ToString("c")] - <a asp-controller="item" asp-action="Details" asp-route-id="@item.Id">@item.Item.Name</a>
                                         </div>
                                     </li>
                                 }
@@ -40,6 +41,9 @@
                             @order.OrderItems.Select(m => m.Item.Price * m.Amount).Sum().ToString("c")
                         </td>
                         <td class="align-middle"> - </td>
+                        <td class="align-middle">
+                            @order.Status
+                        </td>
                     </tr>
                 }
             </tbody>

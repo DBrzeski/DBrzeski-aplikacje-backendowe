@@ -1,4 +1,5 @@
-﻿using storeapp.Models;
+﻿using storeapp.Data.Enums;
+using storeapp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
