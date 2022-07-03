@@ -16,35 +16,45 @@
                     <th>Order ID</th>
                     <td>Items</td>
                     <th>Total</th>
-                    <th>User</th>
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                        <th>User</th>
+                    }
+                        
                     <th>Order Status</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var order in Model)
                 {
-                    <tr>
-                        <td class="align-middle">@order.Id</td>
-                        <td class="align-middle">
-                            <ul style="list-style-type:none">
-                                @foreach (var item in order.OrderItems)
-                                {
-                                    <li>
-                                        <div class="alert alert-info" role="alert">
-                                            <span class="badge bg-success">@item.Amount</span> [@item.Price.ToString("c")] - <a asp-controller="item" asp-action="Details" asp-route-id="@item.Id">@item.Item.Name</a>
-                                        </div>
-                                    </li>
-                                }
-                            </ul>
-                        </td>
-                        <td class="align-middle">
-                            @order.OrderItems.Select(m => m.Item.Price * m.Amount).Sum().ToString("c")
-                        </td>
-                        <td class="align-middle"> - </td>
-                        <td class="align-middle">
-                            @order.Status
-                        </td>
-                    </tr>
+                <tr>
+                    <td class="align-middle">@order.Id</td>
+                    <td class="align-middle">
+                        <ul style="list-style-type:none">
+                            @foreach (var item in order.OrderItems)
+                            {
+                                <li>
+                                    <div class="alert alert-info" role="alert">
+                                        <span class="badge bg-success">@item.Amount</span> [@item.Price.ToString("c")] - <a asp-controller="item" asp-action="Details" asp-route-id="@item.Id">@item.Item.Name</a>
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                    </td>
+                    <td class="align-middle">
+                        @order.OrderItems.Select(m => m.Item.Price * m.Amount).Sum().ToString("c")
+                    </td>
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                 
+                    {
+                        <td class="align-middle"> @order.User.FullName </td>
+                    }
+                        
+
+                    <td class="align-middle">
+                        @order.Status
+                    </td>
+                </tr>
                 }
             </tbody>
         </table>

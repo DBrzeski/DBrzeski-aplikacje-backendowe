@@ -5,6 +5,7 @@ using storeapp.Data.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace storeapp.Controllers
@@ -58,8 +59,8 @@ namespace storeapp.Controllers
         public async Task<IActionResult> Complete()
         {
             var items = _shoppingCart.GetShoppingCartItems();
-            string userId = "";
-            string userEmail = "";
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            string userEmail = User.FindFirstValue(ClaimTypes.Email);
 
             await _orderService.StoreOrderAsync(items, userId, userEmail);
             await _shoppingCart.ClearShoppingCartAsync();
@@ -67,8 +68,9 @@ namespace storeapp.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            string userId = "";
-            var orders = await _orderService.GetOrderByUserIdAsync(userId);
+            string userRole = User.FindFirstValue(ClaimTypes.Role);
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var orders = await _orderService.GetOrderByUserIdAndRoleAsync(userId,userRole);
             return View(orders);
         }
     }

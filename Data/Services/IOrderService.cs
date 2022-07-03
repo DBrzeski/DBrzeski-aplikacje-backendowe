@@ -10,6 +10,6 @@ namespace storeapp.Data.Services
     public interface IOrderService
     {
         Task StoreOrderAsync(List<ShoppingCartItem> items, string userId, string userEmail);
-        Task<List<Order>> GetOrderByUserIdAsync(string UserId);
+        Task<List<Order>> GetOrderByUserIdAndRoleAsync(string UserId, string UserRole);
     }
 }
