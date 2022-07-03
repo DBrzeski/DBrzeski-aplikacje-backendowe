@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using storeapp.Data;
 using storeapp.Data.Services;
+using storeapp.Data.Static;
 using storeapp.Models;
 using System;
 using System.Collections.Generic;
@@ -10,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace storeapp.Controllers
 {
+    [Authorize(Roles = UserRoles.Admin)]
     public class ManufacturerController : Controller
     {
         private readonly IManufacturerService _service;
@@ -17,6 +20,7 @@ namespace storeapp.Controllers
         {
             _service = service;
         }
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var data = await _service.GetAllAsync();
@@ -37,7 +41,7 @@ namespace storeapp.Controllers
             await _service.AddAsync(manufacturer);
             return RedirectToAction(nameof(Index));
         }
-
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
         {
             var manufacturerDetails = await _service.GetByIdAsync(id);

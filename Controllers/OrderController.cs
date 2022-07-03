@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using storeapp.Data.Cart;
 using storeapp.Data.Services;
+using storeapp.Data.Static;
 using storeapp.Data.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -10,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace storeapp.Controllers
 {
+    [Authorize]
     public class OrderController : Controller
     {
         private readonly IItemService _itemService;

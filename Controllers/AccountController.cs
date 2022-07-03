@@ -86,6 +86,10 @@ namespace storeapp.Controllers
             await _signinManager.SignOutAsync();
             return RedirectToAction("Index", "Item");
         }
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
 
     }
 }
