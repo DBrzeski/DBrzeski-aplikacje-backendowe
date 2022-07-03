@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using storeapp.Data;
+using storeapp.Data.Static;
 using storeapp.Data.ViewModels;
 using storeapp.Models;
 using System;
@@ -28,6 +29,8 @@ namespace storeapp.Controllers
 
         public IActionResult Login() => View(new LoginVM());
 
+        public IActionResult Register() => View(new RegisterVM());
+
         [HttpPost]
         public async Task<IActionResult> Login(LoginVM loginVM)
         {
@@ -50,6 +53,32 @@ namespace storeapp.Controllers
             }
             TempData["Error"] = "Wrong login or password.";
             return View(loginVM);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Register(RegisterVM registerVM)
+        {
+            if (!ModelState.IsValid) return View(registerVM);
+
+            var user = await _userManager.FindByEmailAsync(registerVM.Email);
+            if (user != null)
+            {
+                TempData["Error"] = "This email address is already in use.";
+                return View(registerVM);
+            }
+            var newUser = new ApplicationUser()
+            {
+                FullName = registerVM.Fullname,
+                Email = registerVM.Email,
+                UserName = registerVM.Email
+            };
+            var newUserResponse = await _userManager.CreateAsync(newUser, registerVM.Password);
+            if (newUserResponse.Succeeded)
+            {
+                await _userManager.AddToRoleAsync(newUser, UserRoles.User);
+
+            };
+            return View("RegisterComplete");
+
         }
 
     }
