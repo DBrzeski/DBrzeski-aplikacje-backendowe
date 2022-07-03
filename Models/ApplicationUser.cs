@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace storeapp.Models
 {
-    public class ApplicationUser :IdentityUser
+    public class ApplicationUser : IdentityUser
     {
         [Display(Name = "Full Name")]
         public string FullName { get; set; }
+
     }
 }
