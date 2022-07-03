@@ -80,6 +80,12 @@ namespace storeapp.Controllers
             return View("RegisterComplete");
 
         }
+        
+        public async Task<IActionResult> Logout()
+        {
+            await _signinManager.SignOutAsync();
+            return RedirectToAction("Index", "Item");
+        }
 
     }
 }
