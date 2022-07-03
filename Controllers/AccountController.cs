@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using storeapp.Data;
+using storeapp.Data.ViewModels;
 using storeapp.Models;
 using System;
 using System.Collections.Generic;
@@ -25,9 +26,6 @@ namespace storeapp.Controllers
         }
 
 
-        public IActionResult Index()
-        {
-            return View();
-        }
+        public IActionResult Login() => View(new LoginVM());
     }
 }
