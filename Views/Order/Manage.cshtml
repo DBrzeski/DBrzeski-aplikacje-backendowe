@@ -1,0 +1,40 @@
+﻿@model Order
+@using storeapp.Data.Enums;
+@{
+    ViewData["Title"] = "Edit Order";
+}
+
+<div class="row">
+    <div class="col-md-8 offset-2">
+        <p>
+            <h4>Edit Status</h4>
+        </p>
+
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <form asp-action="Manage">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Status" class="control-label"></label>
+                                <select asp-for="Status" class="form-control" asp-items="Html.GetEnumSelectList<Status>();"></select>
+                                <span asp-validation-for="Status" class="text-danger"></span>
+                            </div>
+                            <input type="hidden" asp-for="UserId" class="form-control" />
+                            <input type="hidden" asp-for="Email" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Update" class="btn btn-outline-success float-right" />
+                        <a class="btn btn-outline-secondary" asp-action="Index">Show all</a>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>

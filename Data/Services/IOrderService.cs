@@ -11,5 +11,7 @@ namespace storeapp.Data.Services
     {
         Task StoreOrderAsync(List<ShoppingCartItem> items, string userId, string userEmail);
         Task<List<Order>> GetOrderByUserIdAndRoleAsync(string UserId, string UserRole);
+        Task <Order> GetOrderByIdAsync(int id);
+        Task <Order> UpdateAsync(int id, Order order);
     }
 }

@@ -4,6 +4,7 @@ using storeapp.Data.Cart;
 using storeapp.Data.Services;
 using storeapp.Data.Static;
 using storeapp.Data.ViewModels;
+using storeapp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -75,6 +76,23 @@ namespace storeapp.Controllers
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var orders = await _orderService.GetOrderByUserIdAndRoleAsync(userId,userRole);
             return View(orders);
+        }
+        [Authorize(Roles = UserRoles.Admin)]
+        public async Task<IActionResult> Manage(int id)
+        {
+            var orderDetails = await _orderService.GetOrderByIdAsync(id);
+            if (orderDetails == null) return View("NotFound");
+            return View(orderDetails);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Manage(int id,[Bind("Id,Status,Email,UserId")] Order order)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(order);
+            }
+            await _orderService.UpdateAsync(id, order);
+            return RedirectToAction(nameof(Index));
         }
     }
 }

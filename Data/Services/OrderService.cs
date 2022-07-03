@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using storeapp.Data.Base;
 using storeapp.Data.Enums;
 using storeapp.Models;
 using System;
@@ -15,6 +16,13 @@ namespace storeapp.Data.Services
         {
             _context = context;
         }
+
+        public async Task<Order> GetOrderByIdAsync(int id)
+        {
+            var result = await _context.Orders.FirstOrDefaultAsync(n => n.Id == id);
+            return result;
+        }
+
         public async Task<List<Order>> GetOrderByUserIdAndRoleAsync(string userId, string userRole)
         {
             var orders = await _context.Orders.Include(n => n.OrderItems).ThenInclude(n => n.Item).Include(n => n.User).ToListAsync();
@@ -50,6 +58,13 @@ namespace storeapp.Data.Services
                 await _context.OrderItems.AddAsync(orderItem);
             }
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<Order> UpdateAsync(int id, Order newOrder)
+        {
+            _context.Update(newOrder);
+            await _context.SaveChangesAsync();
+            return newOrder;
         }
     }
 }
