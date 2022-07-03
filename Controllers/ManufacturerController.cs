@@ -56,7 +56,7 @@ namespace storeapp.Controllers
             return View(manufacturerDetails);
         }
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,PictureUrl")] Manufacturer manufacturer)
+        public async Task<IActionResult> Edit(int id, [Bind("UserId,Name,PictureUrl")] Manufacturer manufacturer)
         {
             if (!ModelState.IsValid)
             {
